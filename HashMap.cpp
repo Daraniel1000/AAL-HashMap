@@ -1,0 +1,66 @@
+﻿#include<iostream>
+#include<chrono>
+#include<fstream>
+#include "HashMap.h"
+using namespace std;
+using namespace chrono;
+
+int main(char argc, char** argv)
+{
+    time_point<system_clock> start, stop, allstop;
+    int n = 0, ndel = 0;
+    string s;
+    if(argc < 2)
+    {
+        HashMap map;
+        cout<<"aby zakończyć wprowadzanie, wprowadź niedozwolony znak na początku linii\n";
+        start = system_clock::now();
+        cin>>s;
+        while((s[0]>64&&s[0]<91) || (s[0]>96&&s[0]<123))
+        {
+            map.add(s);
+            ++n;
+            cin>>s;
+        }
+        stop = system_clock::now();
+    }
+    else
+    {
+        string fname = argv[1];
+        int hashf = argc>2? atoi(argv[2]) : 0;
+        string outname = argc > 3? argv[3] : "";
+        HashMap map(hashf);
+        ifstream fin(fname, std::ifstream::in);
+        if(!fin.is_open())
+        {
+            cout<<"Blad otwarcia pliku wejsciowego\n";
+            return -1;
+        }
+        start = system_clock::now();
+        while(fin>>s)
+        {
+            map.add(s);
+            ++n;
+        }
+        stop = system_clock::now();
+        fin.close();
+        if(outname.empty())
+        {
+            fin.open(outname);
+            while(fin>>s)
+            {
+                map.remove(s);
+                ++ndel;
+            }
+        }
+        allstop = system_clock::now();
+    }
+    ofstream fout("times.txt", std::ofstream::app);
+    duration<double> dur = stop - start;
+    cout<<"elements inserted: "<<n<<" time taken: "<<dur.count()<<endl;
+    if(ndel>0)
+    {
+        dur = allstop - stop;
+        cout<<"elements removed: "<<ndel<<" time taken: "<<dur.count()<<endl;
+    }
+}
