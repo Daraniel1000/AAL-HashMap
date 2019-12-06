@@ -1,3 +1,6 @@
+/*
+Maciej Kapuscinski - Tablica mieszajaca AAL
+*/
 #include<iostream>
 #include<fstream>
 #include<vector>
@@ -8,10 +11,9 @@ using namespace std;
 amounts 0-25  - A-Z
 amounts 26-51 - a-z
 amounts 52    - end of word
-amounts 53    - n of entries in current letter
 */
 
-int bmain(char argc, char** argv)
+int main(char argc, char** argv)
 {
     int nwords;
     string fname;
@@ -27,8 +29,8 @@ int bmain(char argc, char** argv)
     }
     size_t n, i;
     int temp;
-    vector<int> amounts;
-    vector<std::discrete_distribution<int>> distribution;
+    vector<int> amounts;                                        //wektor ilości do tworzenia rozkładów dyskretnych
+    vector<std::discrete_distribution<int>> distribution;       //wektor rozkładów dyskretnych do generacji liter
     char letter;
     fin>>n;
     for(size_t a=0; a<n; ++a)
@@ -57,10 +59,10 @@ int bmain(char argc, char** argv)
         i=0;
         while(true)
         {
-            letter = distribution[i](gen);
-            if(letter<26) letter += 65;
-            else if(letter<52) letter += 71;
-            else break;
+            letter = distribution[i](gen);          //losowanie litery używając dystrybucji dla danego miejsca w słowie
+            if(letter<26) letter += 65;             //duże litery
+            else if(letter<52) letter += 71;        //małe litery
+            else break;                             //znak końca słowa
             fout<<letter;
             ++i;
             if(i>=n)
