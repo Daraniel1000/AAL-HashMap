@@ -14,18 +14,16 @@ class HashMap
 {
 public:
 
-  HashMap()
+  HashMap(): hash_used(0)
   {
     hashTab = new std::list<std::string>[SIZE];
-    hash_used = 0;
   }
 
-  HashMap(int HashUsed)
+  HashMap(int HashUsed): hash_used(HashUsed)
   {
     if(HashUsed<0 || HashUsed>1)
         throw std::invalid_argument("trying to use nonexistent hash function");
     hashTab = new std::list<std::string>[SIZE];
-    hash_used = HashUsed;
   }
 
   ~HashMap()
@@ -100,7 +98,7 @@ private:
 
     std::list<std::string>* hashTab;
     static const std::size_t SIZE = MAXSIZE;
-    size_t hash_used;
+    const size_t hash_used;
 
     void clear()                            //czyszczenie tablicy
     {
