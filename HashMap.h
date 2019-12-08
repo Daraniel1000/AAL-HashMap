@@ -7,7 +7,7 @@ Maciej Kapuscinski - Tablica mieszajaca AAL
 #include<stdexcept>
 #include<list>
 #include<string>
-#define MAXSIZE 10000
+#define MAXSIZE 100000
 
 
 class HashMap

@@ -10,7 +10,7 @@ using namespace chrono;
 
 int main(char argc, char** argv)
 {
-    steady_clock::time_point start , stop, allstop;
+    time_point<system_clock> start , stop, allstop;
     int n = 0, ndel = 0, nerr = 0, nerr_del = 0;
     int hashf = argc>2? atoi(argv[2]) : 0;
     string s;
@@ -18,7 +18,7 @@ int main(char argc, char** argv)
     {
         HashMap map;
         cout<<"aby zakończyć wprowadzanie, wprowadź niedozwolony znak na początku linii\n";
-        start = steady_clock::now();
+        start = system_clock::now();
         cin>>s;
         while((s[0]>64&&s[0]<91) || (s[0]>96&&s[0]<123))
         {
@@ -33,7 +33,7 @@ int main(char argc, char** argv)
             ++n;
             cin>>s;
         }
-        stop = steady_clock::now();
+        stop = system_clock::now();
     }
     else
     {
@@ -46,7 +46,7 @@ int main(char argc, char** argv)
             cout<<"Blad otwarcia pliku wejsciowego\n";
             return -1;
         }
-        start = steady_clock::now();
+        start = system_clock::now();
         while(fin>>s)
         {
             try
@@ -59,9 +59,9 @@ int main(char argc, char** argv)
             }
             ++n;
         }
-        stop = steady_clock::now();
+        stop = system_clock::now();
         fin.close();
-        if(outname.empty())
+        if(!outname.empty())
         {
             fin.open(outname);
             while(fin>>s)
@@ -77,12 +77,15 @@ int main(char argc, char** argv)
                 ++ndel;
             }
         }
-        allstop = steady_clock::now();
+        allstop = system_clock::now();
     }
     ofstream fout("times.txt", std::ofstream::app);
-    fout<<"elements inserted: "<<n<<" time taken: "<<duration_cast<microseconds>(stop - start).count()<<" us errors encountered: "<<nerr<<" Hash function used: "<<hashf<<endl;
+    //cout<<duration_cast<microseconds>(stop-start).count()<<endl;
+    fout<<n<<" "<<duration_cast<microseconds>(stop-start).count()<<" "<<hashf<<endl;
+    //fout<<"elements inserted: "<<n<<" :time taken: "<<duration_cast<microseconds>(stop-start).count()<<" :us errors encountered: "<<nerr<<" :Hash function used: "<<hashf<<endl;
     if(ndel>0)
     {
-        fout<<"elements removed: "<<ndel<<" time taken: "<<duration_cast<microseconds>(allstop - stop).count()<<" us errors encountered: "<<nerr_del<<endl;
+        fout<<ndel<<" "<<duration_cast<microseconds>(allstop-stop).count()<<" del"<<endl;
+        //fout<<"elements removed: "<<ndel<<" :time taken: "<<duration_cast<microseconds>(allstop - stop).count()<<" :us errors encountered: "<<nerr_del<<endl;
     }
 }
