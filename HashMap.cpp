@@ -91,9 +91,10 @@ int main(int argc, char** argv)
         allstop = system_clock::now();
     }
     ofstream fout("times.txt", std::ofstream::app);
-    fout<<"elements inserted: "<<n<<" :time taken: "<<duration_cast<microseconds>(stop-start).count()<<" :us errors encountered: "<<nerr<<" :Hash function used: "<<hashf<<endl;
+    fout<<"elementy dodane: "<<n<<" czas wykonania: "<<duration_cast<microseconds>(stop-start).count()<<" us ";
     if(ndel>0)
     {
-        fout<<"elements removed: "<<ndel<<" :time taken: "<<duration_cast<microseconds>(allstop - stop).count()<<" :us errors encountered: "<<nerr_del<<endl;
+        fout<<"elementy usuniete: "<<ndel<<" czas wykonania: "<<duration_cast<microseconds>(allstop - stop).count()<<" us ";
     }
+    cout<<"Funkcja mieszajaca: "<<hashf<<endl;
 }
