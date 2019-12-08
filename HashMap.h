@@ -4,9 +4,9 @@ Maciej Kapuscinski - Tablica mieszajaca AAL
 #ifndef AAL_HASHMAP
 #define AAL_HASHMAP
 
-#include<stdexcept>
-#include<list>
-#include<string>
+#include <stdexcept>
+#include <list>
+#include <string>
 #define MAXSIZE 100000
 
 

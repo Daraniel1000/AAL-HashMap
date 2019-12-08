@@ -13,8 +13,17 @@ amounts 26-51 - a-z
 amounts 52    - end of word
 */
 
-int main(char argc, char** argv)
+int main(int argc, char** argv)
 {
+    if(argc > 1)
+    {
+        string s = argv[1];
+        if(s == "-h")
+        {
+            cout<<"uzycie: ./tgen n filename\nn - ilosc slow do wygenerowania\nfilename - nazwa pliku wyjscia\ndomyslne filename - out.txt"<<endl;
+            return 0;
+        }
+    }
     int nwords;
     string fname;
     if(argc > 1) nwords = atoi(argv[1]);

@@ -13,8 +13,17 @@ amounts 26-51 - a-z
 amounts 52    - end of word
 */
 
-int main(char argc, char** argv)
+int main(int argc, char** argv)
 {
+    if(argc > 1)
+    {
+        string s = argv[1];
+        if(s == "-h")
+        {
+            cout<<"uzycie: ./pgen filename\nfilename - nazwa pliku wejsciowego\ndomyslne filename - in.txt"<<endl;
+            return 0;
+        }
+    }
     string fname;
     if(argc<2) fname = "in.txt";
     else fname = argv[1];
