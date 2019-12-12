@@ -50,7 +50,7 @@ int main(int argc, char** argv)
             fin>>temp;
             amounts.push_back(temp);
         }
-        distribution.push_back(*new std::discrete_distribution<int>(amounts.begin(), amounts.end()));
+        distribution.push_back(std::discrete_distribution<int>(amounts.begin(), amounts.end()));
     }
     fin.close();
 

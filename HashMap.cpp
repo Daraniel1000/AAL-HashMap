@@ -96,5 +96,5 @@ int main(int argc, char** argv)
     {
         fout<<"elementy usuniete: "<<ndel<<" czas wykonania: "<<duration_cast<microseconds>(allstop - stop).count()<<" us ";
     }
-    cout<<"Funkcja mieszajaca: "<<hashf<<endl;
+    fout<<"Funkcja mieszajaca: "<<hashf<<endl;
 }
